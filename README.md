@@ -1,6 +1,6 @@
-# monolithic-starter
+# BookTheShow
+Creating a multi-role, multi-theater movie ticket booking system, similar to BookMyShow, Paytm Movies, or Fandango. 
 
-A production-ready Node.js monolithic starter application built with Express, MongoDB (Mongoose), and a layered architecture. Comes pre-wired with logging, CORS, environment config, real-time support via Socket.IO, Redis, and a structured error-handling system.
 
 ---
 
