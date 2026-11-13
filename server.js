@@ -6,6 +6,7 @@ const cors = require('cors');
 const connectDatabase = require('./src/configs/dbConfig');
 const logger = require('./src/configs/loggerConfig');
 const pingRouter = require('./src/routes/ping-routes');
+const movieRouter = require('./src/routes/movies-routes');
 
 // Load environment variables
 dotenv.config();
@@ -19,7 +20,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use('/api', pingRouter);
+app.use('/api/v1', pingRouter);
+app.use('/api/v1', movieRouter);
 
 // Home route
 app.get("/", (req, res) => {
