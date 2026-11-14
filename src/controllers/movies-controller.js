@@ -91,4 +91,27 @@ const getAllMovies = async (req, res) => {
     }
 };
 
-module.exports = { createMovie, getMovies, deleteMovie, getAllMovies };
+const updateMovie = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = req.body;
+        const movie = await MovieService.updateMovie(id, data);
+
+        return res.status(200).json({
+            success: true,
+            error: {},
+            status: "Movie updated successfully",
+            data: movie
+        });
+    } catch (err) {
+        console.error("Error updating movie:", err);
+        const statusCode = err.message === 'Movie not found' ? 404 : 500;
+        return res.status(statusCode).json({
+            success: false,
+            message: err.message,
+            error: err.message
+        });
+    }
+}
+
+module.exports = { createMovie, getMovies, deleteMovie, getAllMovies, updateMovie };
