@@ -30,9 +30,20 @@ const getAllMovies = async () => {
     return movies;
 };
 
+const updateMovie = async (id, data) => {
+    const movie = await Movie.findByIdAndUpdate(id, data, { new: true, runValidators: true });
+
+    if (!movie) {
+        throw new Error('Movie not found');
+    }
+
+    return movie;
+};
+
 module.exports = {
     createMovie,
     getMovieById,
     deleteMovieById,
     getAllMovies,
+    updateMovie,
 };
