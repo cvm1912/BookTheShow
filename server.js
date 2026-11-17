@@ -8,6 +8,7 @@ const connectDatabase = require('./src/configs/dbConfig');
 const logger = require('./src/configs/loggerConfig');
 const pingRouter = require('./src/routes/ping-routes');
 const movieRouter = require('./src/routes/movies-routes');
+const theatreRoutes = require('./src/routes/theatre-routes');
 
 // Load environment variables
 dotenv.config();
@@ -26,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 app.use('/api/v1', pingRouter);
 app.use('/api/v1', movieRouter);
+app.use('/api/v1/', theatreRoutes);
 
 // Home route
 app.get("/", (req, res) => {
