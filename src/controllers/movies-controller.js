@@ -65,7 +65,7 @@ const deleteMovie = async (req, res) => {
 
 const getAllMovies = async (req, res) => {
     try {
-        const movies = await MovieService.getAllMovies();
+        const movies = await MovieService.getAllMovies(req.query);
 
         if (movies.length === 0) {
             return res.status(404).json({
@@ -113,5 +113,7 @@ const updateMovie = async (req, res) => {
         });
     }
 }
+
+
 
 module.exports = { createMovie, getMovies, deleteMovie, getAllMovies, updateMovie };
