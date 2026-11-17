@@ -25,8 +25,19 @@ const deleteMovieById = async (id) => {
     return movie;
 };
 
-const getAllMovies = async () => {
-    const movies = await Movie.find();
+const getAllMovies = async (filter) => {
+    let query= {};
+    if(filter.name){
+        query.name = filter.name;
+    }
+
+    const movies = await Movie.find(query);
+    if(!movies){
+        return {
+            err:'Not able to find the query movie',
+            code:404
+        }
+    }
     return movies;
 };
 

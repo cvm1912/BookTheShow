@@ -1,8 +1,9 @@
 const { Router } = require("express");
 const MovieController = require("../controllers/movies-controller");
+const MovieMiddleware = require("../middlewares/movie-middleware");
 const movieRouter = Router();
 
-movieRouter.post("/movies", MovieController.createMovie);
+movieRouter.post("/movies", MovieMiddleware.validateCreateMovieRequest, MovieController.createMovie);
 movieRouter.get("/movies/:id", MovieController.getMovies);
 movieRouter.delete("/movies/:id", MovieController.deleteMovie);
 movieRouter.get("/movies", MovieController.getAllMovies);
