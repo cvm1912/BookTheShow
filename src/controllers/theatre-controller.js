@@ -110,10 +110,35 @@ const deleteTheatre = async (req, res) => {
     }
 };
 
+const updateMoviesInTheatre = async (req, res) => {
+    try {
+        const theatre = await theatreService.updateMoviesInTheatre(
+            req.params.theatreId,
+            req.body.movieId,
+            req.body.insert
+        );
+        res.status(200).json({
+            success: true,
+            error: {},
+            message: "Theatre movies updated successfully",
+            data: theatre
+        });
+    } catch (err) {
+        console.error("Error updating movies in theatre:", err);
+        const statusCode = err.message === 'Theatre not found' ? 404 : 400;
+        res.status(statusCode).json({
+            success: false,
+            message: err.message,
+            error: err.message
+        });
+    }
+};
+
 module.exports = {
     createTheatre,
     fetchTheatres,
     getTheatreById,
     updateTheatre,
     deleteTheatre,
+    updateMoviesInTheatre,
 };

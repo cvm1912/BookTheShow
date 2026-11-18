@@ -44,6 +44,33 @@ const updateTheatre = async (id, data) => {
     return theatre;
 };
 
+const updateMoviesInTheatre = async (theatreId, movieId, insert) => {
+    const theatre = await Theatre.findById(theatreId);
+
+    if (!theatre) {
+        throw new Error('Theatre not found');
+    }
+
+    const alreadyAdded = theatre.movies.some(id => id.toString() === movieId.toString());
+
+    if (insert) {
+        // do not add if movie is already present
+        if (alreadyAdded) {
+            throw new Error('Movie is already added to this theatre');
+        }
+        theatre.movies.push(movieId);
+    } else {
+        // do not remove if movie is not present
+        if (!alreadyAdded) {
+            throw new Error('Movie is not present in this theatre');
+        }
+        theatre.movies = theatre.movies.filter(id => id.toString() !== movieId.toString());
+    }
+
+    await theatre.save();
+    return theatre.populate('movies');
+};
+
 const deleteTheatre = async (id) => {
     const theatre = await Theatre.findByIdAndDelete(id);
 
@@ -60,4 +87,5 @@ module.exports = {
     getTheatreById,
     updateTheatre,
     deleteTheatre,
+    updateMoviesInTheatre,
 };

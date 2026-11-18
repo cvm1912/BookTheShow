@@ -14,7 +14,11 @@ const theatreSchema = new mongoose.Schema({
         type:String, 
         required:[true, "pincode is required." ]
     },
-    address:String
+    address:String,
+    movies:{
+        type:[mongoose.Schema.Types.ObjectId],
+        ref: 'Movies'
+    }
 }, {timestamps:true});
 
 const Theatre = mongoose.model('Theatre', theatreSchema);
