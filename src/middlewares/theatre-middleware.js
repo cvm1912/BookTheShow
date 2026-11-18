@@ -64,7 +64,7 @@ const validateUpdateMovies = (req, res, next) => {
     }
 
     // validate insert flag is present
-    if (!req.body.insert) {
+    if (req.body.insert === undefined) {
         return res.status(400).json({
             success: false,
             err: "The insert flag is not present in the request",
